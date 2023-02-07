@@ -9,16 +9,19 @@ public class JunitTest {
   @Test
   public void testClientServerConnection() {
     int serverPort = 7777; // porta del server
-    
+    Thread thread = new Thread();
     // Avviamo il server in un thread separato
-    new Thread(() -> {
-      try {
-        Server server = new Server();
-        server.startServer(7777);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }).start();
+    new Thread(new Runnable() {
+		@Override
+		public void run() {
+		  try {
+		    Server server = new Server();
+		    server.startServer(7777);
+		  } catch (IOException e) {
+		    e.printStackTrace();
+		  }
+		}
+	}).start();
     
     // Diamo al server tempo di avviarsi
     try {
