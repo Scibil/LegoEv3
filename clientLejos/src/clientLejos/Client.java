@@ -41,10 +41,10 @@ public class Client {
 
     public void riceviMessaggio() throws IOException {
 
-        //ricezione dati da server
+        //ricezione dati dal server
         input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         
-        System.out.println("Velocita: " + vel);
+        //System.out.println("Velocita: " + vel);
         
         vel = input.readLine();
     }
