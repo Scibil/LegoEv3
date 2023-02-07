@@ -18,8 +18,11 @@ import lejos.utility.Delay;
 public class Telecomando {
 	RegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.B);
 	RegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.C);
+	RegulatedMotor motorC = new EV3LargeRegulatedMotor(MotorPort.A);
 	
-	private int maxVel = 200;
+	
+	
+	private int maxVel = 1000;
 	private int vel;
 	private int i = 0;
 	private int midVel;
@@ -29,9 +32,11 @@ public class Telecomando {
 	public void vaiAvanti() 
 	{
 		setVel();
+		motorA.setSpeed(1000);
+		motorB.setSpeed(1000);
 		motorA.forward();
 		motorB.forward();
-		if (getMidVel() < 800) {
+		if (getMidVel() < 850) {
 			i = i+20;
 			aumVel(i);
 		}
@@ -50,10 +55,12 @@ public class Telecomando {
 	public void vaiIndietro() 
 	{
 		setVel();	
+		motorA.setSpeed(1000);
+		motorB.setSpeed(1000);
 		motorA.backward();
 		motorB.backward();
 		Sound.beepSequence();
-		if (getMidVel() < 800) {
+		if (getMidVel() < 850) {
 			i = i+20;
 			aumVel(i);
 		}
@@ -84,6 +91,21 @@ public class Telecomando {
 		
 		
 		motorB.setSpeed((int) (motorA.getSpeed()/1.55));
+		motorA.forward();
+		motorB.forward();
+	}
+	
+	public void correggiDx() {
+		
+		
+		motorB.setSpeed((int) (motorA.getSpeed()/1.15));
+		motorA.forward();
+		motorB.forward();
+	}
+	public void correggiSx() {
+		
+		
+		motorA.setSpeed((int) (motorB.getSpeed()/1.15));
 		motorA.forward();
 		motorB.forward();
 	}

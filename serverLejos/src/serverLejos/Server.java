@@ -1,6 +1,7 @@
 package serverLejos;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -13,10 +14,10 @@ public class Server {
     Telecomando muovi;
     
    
-
+    
     public void startServer(int porta) throws IOException {
     	
-        //creo un socket "serverSocket" in ascolto nella porta 30015
+        //creo un socket in ascolto nella porta 7777
         serverSocket = new ServerSocket(porta);
 
         System.out.println("Il server e' partito!");
@@ -24,7 +25,6 @@ public class Server {
         System.out.println("Porta: 7777");
         
 
-        //accetto la comunicazione del client creando un altro oggetto socket
         clientSocket = serverSocket.accept();
 
         System.out.println("Client connesso correttamente!");
@@ -39,13 +39,12 @@ public class Server {
 
         while (true) {
             char c = (char)input.read();
-            System.out.println("Client: " + c);
             
             switch (c)
             {
             
             case '0':
-            	System.out.println("rallenta");
+            	//System.out.println("rallenta");
             	muovi.rallenta();
             	break;
             	
@@ -81,8 +80,18 @@ public class Server {
             	muovi.shutDown();
             	stopServer();
             	break;
-            }
             
+            case 'g':
+            	System.out.println("correzione a destra");
+            	muovi.correggiDx();
+            	break;
+            	
+            case 'f':
+            	System.out.println("correzione a sinistra");
+            	muovi.correggiSx();
+            	
+            	break;
+            }
             getMidVel();
         }
     }
