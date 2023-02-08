@@ -17,7 +17,7 @@ public class Server {
     
     public void startServer(int porta) throws IOException {
     	
-        //creo un socket in ascolto nella porta 7777
+        //creo un socket su porta 7777
         serverSocket = new ServerSocket(porta);
 
         System.out.println("Il server e' partito!");
@@ -81,7 +81,7 @@ public class Server {
             	stopServer();
             	break;
             
-            case 'g':
+            /*case 'g':
             	System.out.println("correzione a destra");
             	muovi.correggiDx();
             	break;
@@ -90,7 +90,7 @@ public class Server {
             	System.out.println("correzione a sinistra");
             	muovi.correggiSx();
             	
-            	break;
+            	break;*/
             }
             getMidVel();
         }
@@ -101,9 +101,7 @@ public class Server {
     	//invio velocità al client
         output.println(muovi.getMidVel());
     	
-    	//int veloc = (int) Math.floor(Math.random()*(740-100+1)+100);
-        //output.println(veloc);
-        
+    	
     }
     
     public void stopServer() throws IOException {

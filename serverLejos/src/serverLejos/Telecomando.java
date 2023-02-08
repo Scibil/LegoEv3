@@ -27,7 +27,20 @@ public class Telecomando {
 	private int i = 0;
 	private int midVel;
 
-	
+	public void vaiIndietro() 
+	{
+		setVel();	
+		motorA.setSpeed(1000);
+		motorB.setSpeed(1000);
+		motorA.backward();
+		motorB.backward();
+		Sound.beepSequence();
+		if (getMidVel() < 850) {
+			i = i+20;
+			aumVel(i);
+		}
+		vel = motorA.getSpeed();
+	}
 	
 	public void vaiAvanti() 
 	{
@@ -52,20 +65,7 @@ public class Telecomando {
 		
 	}
 	
-	public void vaiIndietro() 
-	{
-		setVel();	
-		motorA.setSpeed(1000);
-		motorB.setSpeed(1000);
-		motorA.backward();
-		motorB.backward();
-		Sound.beepSequence();
-		if (getMidVel() < 850) {
-			i = i+20;
-			aumVel(i);
-		}
-		vel = motorA.getSpeed();
-	}
+	
 	
 	public void aumVel(int aum)
 	{
@@ -95,7 +95,7 @@ public class Telecomando {
 		motorB.forward();
 	}
 	
-	public void correggiDx() {
+	/*public void correggiDx() {
 		
 		
 		motorB.setSpeed((int) (motorA.getSpeed()/1.15));
@@ -108,14 +108,9 @@ public class Telecomando {
 		motorA.setSpeed((int) (motorB.getSpeed()/1.15));
 		motorA.forward();
 		motorB.forward();
-	}
+	}*/
 	
-	public void reset() {
-		
-		motorA.setSpeed(vel);
-		motorB.setSpeed(vel);
-		i = 0;
-	}
+	
 	
 	public void setVel() {
 		
@@ -125,13 +120,10 @@ public class Telecomando {
 	
 	public void rallenta() {
 		
-		//if (motorA.getSpeed() > 0 && motorB.getSpeed() > 0) {
 			
 			motorA.setSpeed(motorA.getSpeed() - 50);
 			motorB.setSpeed(motorB.getSpeed() - 50);
-		//}
 		
-		//vel = getMidVel();
 	}
 	
 	public void shutDown() {
@@ -141,6 +133,12 @@ public class Telecomando {
 		
 		motorA.close();
 		motorB.close();
+	}
+	public void reset() {
+		
+		motorA.setSpeed(vel);
+		motorB.setSpeed(vel);
+		i = 0;
 	}
 	
 	public int getMidVel() {
