@@ -17,37 +17,23 @@ public class Client {
     private String vel = "0";
 
     public void connessione() throws UnknownHostException, IOException {
-
-        //richiedo il nome del server per connessione
         String nomeServer = JOptionPane.showInputDialog("Inserisci l'indirizzo del server");
-        //richiedo la porta del server per connessione
         String portaServer = JOptionPane.showInputDialog("Inserisci la porta del server");
 
-        //trasformo la porta da String a Integer
         int porta = Integer.parseInt(portaServer);
 
-        //istanzio un socket inserendo il nome del server e la porta
         clientSocket = new Socket(nomeServer, porta);
     }
 
     public void mandaMessaggio(char msg) throws IOException {
 
-        //invio dati in output al server
         output = new DataOutputStream(clientSocket.getOutputStream());
 
         //invio char lettera
         output.writeChar(msg);
     }
 
-    public void riceviMessaggio() throws IOException {
-
-        //ricezione dati dal server
-        input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        
-        //System.out.println("Velocita: " + vel);
-        
-        vel = input.readLine();
-    }
+   
     
     public String getVel() {
     	
@@ -56,10 +42,17 @@ public class Client {
 
     public void chiudiConnessione() throws IOException {
 
-        //chiudo tutto
         clientSocket.close();
         output.close();
         input.close();
+    }
+    public void riceviMessaggio() throws IOException {
+
+        //ricezione dati dal server
+        input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        
+        
+        vel = input.readLine();
     }
 }
 
